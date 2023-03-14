@@ -1,0 +1,35 @@
+
+<table>
+    <tr>
+        <td *ngFor="let f of allFruits" (click)="showForm(f.name)">
+            <img src="./assets/{{ f.image }}" >
+        </td>
+    </tr>
+</table>
+
+<form>
+    <div *ngIf="displayForm === true">
+        <table>
+            <tr>
+                <td>Item:</td>
+                <input type="text" [value]="currentFruit!.name | titlecase">
+                <!-- <td>{{ currentFruit.name | titlecase}}</td> -->
+            </tr>
+            <tr>
+                <td>Unit Price:</td>
+                <input type="number" [value]="currentFruit!.unitPrice">
+                <!-- <td>${{ currentFruit.unitPrice }}</td> -->
+            </tr>
+            <tr>
+                <td>Quantity:</td>
+                <input type="number">
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <button (click)="addFruit()">Add</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</form>
