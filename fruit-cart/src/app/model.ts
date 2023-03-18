@@ -4,16 +4,16 @@ export interface Fruit {
     image: string
 }
 
-export interface Cart {
-    customerName: string
-    address: string
-    delivery: string
-    fruits: Fruit[]
+export interface FruitOrder {
+    item: string
+    unitPrice: number
+    qty: number
 }
 
 export interface Cart {
     customerName: string
     address: string
     delivery: string
-    fruits: Fruit[]
+    orders: FruitOrder[]
 }
+

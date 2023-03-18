@@ -15,12 +15,19 @@ export class TodoComponent implements OnInit{
   ngOnInit(): void {
     this.todoForm = this.createTodoForm()
   }
-  
+
   private createTodoForm(): FormGroup {
     return this.fb.group({
       taskName: this.fb.control(''),
       name: this.fb.control(''),
       tasks: this.taskArray
+    })
+  }
+
+  addTask() {
+    const g = this.fb.group({
+      description: this.fb.control<string>(''),
+      dueDate: this.fb.control<Date>(new Date)
     })
   }
 }

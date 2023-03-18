@@ -1,11 +1,11 @@
 <h1>Cart</h1>
-<table>
+<table [formGroup]="cartForm">
     <tr>
         <td>
             Name:
         </td>
         <td>
-            <input type="text">
+            <input type="text" formControlName="customerName">
         </td>
     </tr>
     <tr>
@@ -13,7 +13,7 @@
             Address:
         </td>
         <td>
-            <input type="text">
+            <input type="text" formControlName="address">
         </td>
     </tr>
     <tr>
@@ -21,20 +21,28 @@
             Delivery:
         </td>
         <td>
-            <input id="am" type="radio">
+            <input value="am" type="radio" name="delivery" formControlName="delivery">
             <label for="am">AM</label>
-            <input id="pm" type="radio">
+            <input value="pm" type="radio" name="delivery" formControlName="delivery">
             <label for="pm">PM</label>
         </td>
     </tr>
+    <!-- display cart here -->
+    <h3>Cart Items</h3>
+    <!-- <div *ngIf="allOrders.length == 0">
+        <p>your cart is empty</p>
+    </div> -->
+    <div *ngIf="allOrders.length > 0">
+        <tr *ngFor="let o of allOrders">
+            <p>{{ o }}</p>
+            <!-- display cart items here -->
+            <!-- name, price, qty, total -->
+        </tr>
+    </div>
     <tr>
-        <!-- display cart items here -->
-        <!-- name, price, qty, total -->
-    </tr>
-    <tr>
-        <td></td>
+        <!-- <td></td> -->
         <td>
-            <button type="submit">Checkout</button>
+            <button type="submit" (click)="checkoutCart()">Checkout</button>
         </td>
     </tr>
 </table>
