@@ -5,7 +5,14 @@
     (addNewFruit)="addFruitToCart($event)"
     ></app-fruits>
 
-
-<app-cart>
-    [fruit]="fruitOrder"
+<app-cart 
+    [allOrders]="fruitList"
+    (onCheckout)="checkoutCart($event)">
 </app-cart>
+
+<div *ngIf="orderId !=''" >
+    <h1>Thank you for your order</h1>
+    <h2>
+        Order Id: {{orderId}}
+    </h2>
+</div>

@@ -28,14 +28,15 @@ export class FruitsComponent implements OnInit{
   ngOnInit(): void {
     // console.info(">>> All Fruits: ", this.allFruits)
     this.fruitForm = this.fb.group({
-      item: this.fb.control<string>('', [Validators.required]),
-      unitPrice: this.fb.control<number>(0, [Validators.required]),
+      // FIXME: RESET VALUES TO '' and 0
+      item: this.fb.control<string>('apple', [Validators.required]),
+      unitPrice: this.fb.control<number>(.3, [Validators.required]),
       qty: this.fb.control<number>(1, [Validators.required])
     })
     // console.info(">>> Fruit Form: ", this.fruitForm);
   }
 
-  // TODO: pass form group to component.html
+  // pass form group to component.html
   addOrder(order: FruitOrder) {
     console.info(">>> adding fruits");
     // extract form values
@@ -43,6 +44,7 @@ export class FruitsComponent implements OnInit{
     this.addNewFruit.next(order)
   }
 
+  // check for valid form
   processOrder() {
     if (this.fruitForm.invalid) {
       this.controlInvalid = true;
