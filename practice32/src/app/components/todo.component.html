@@ -22,7 +22,7 @@
     </table>
     <h2>My Tasks</h2>
     <!-- add if else statement to display array of tasks -->
-    <p>{{ taskArray.controls.length | json}}</p>
+    <p>Task count: {{ taskArray.controls.length | json}}</p>
     <div *ngIf="taskArray.controls.length <= 0">
         <p>No Tasks at the moment</p>
     </div>

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Task } from '../model';
+import { Subject } from 'rxjs';
+import { Task, Todo } from '../model';
 
 @Component({
   selector: 'app-todo',
@@ -12,7 +13,10 @@ export class TodoComponent implements OnInit{
   todoForm!: FormGroup;
   taskArray!: FormArray;
 
-  constructor(private fb: FormBuilder) { }
+  @Output()
+  onSaveTodo = new Subject<Todo>();
+
+  constructor(private fb: FormBuilder) { };
 
   // initialise form and group array
   ngOnInit(): void {
@@ -24,7 +28,6 @@ export class TodoComponent implements OnInit{
       tasks: this.taskArray
     });
     console.info(">>> Forms initialised");
-    // console.info(">>> taskArray: ", this.taskArray, this.todoForm);
   }
 
   // method to add FormGroup to FormArray
@@ -35,10 +38,15 @@ export class TodoComponent implements OnInit{
     })
     this.taskArray.push(g);
     // FIXME: FOR TESTING PURPOSES
-    console.info(">>> current Form state:", this.taskArray, this.todoForm)
+    console.info(">>> current Form state:", this.taskArray, this.todoForm);
   }
 
   processForm() {
     console.info(">>> processing form")
+    // TODO: pass values from form group to Todo model object
+    const todo = this.todoForm.value as Todo;
+
+    // Event bind object to app component
+    this.onSaveTodo.next(todo);
   }
 }
