@@ -7,7 +7,7 @@
 4. checkout
 
 
-Topics Covered:
+## Topics Covered:
 1. Event binding (child -> parent)
     - click button
     - trigger child component method
