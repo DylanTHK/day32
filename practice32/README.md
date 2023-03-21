@@ -1,27 +1,62 @@
 # Practice32
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.2.
+## User Interface
 
-## Development server
+## Topics covered
+1. FormGroup & Form Array (Initialising)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+component.ts
+```
+// initialise variable for form group
+formArray!: FormArray;
+form!: FormGroup;
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+// initilialise form array inside form group
+ngOnInit(): void {
+    this.todoForm = this.fb.group({
+        this.formArray = this.fb.array([]);
+        item1: this.fb.control<T>('{initial_form_value}', [{validators_here}]),
+        item2: this.fb.control<T>('{initial_form_value}', [{validators_here}]),
+        // html formArray name must match - "array"
+        array: this.formArray
+    })
+}
+```
+component.html
+```
+// for form group
+<form [formGroup]="form" (ngSubmit)="processMethod()">
+    //binds input to formGroup's control
+    <input type="text" formControlName="name">
 
-## Build
+    //binds formArray to array inside of formGroup (name must match attribute when initialised - "array")
+    <div [formArray]="array; let idx=index" [formGroupName]="idx" >
+        <input type="text" formControlName="desc">
+    </div>
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+    //binded to (ngSubmit) of formGroup
+    <button type="submit"> Save </button>
 
-## Running unit tests
+</form>
+```
+2. Deleting at index
+component.html
+```
+<button type="button" (click)="deleteTask(idx)"> X </button>
+```
+component.ts
+```
+// remove form array element by index
+deleteTask(idx: number) {
+    formArray.removeAt(idx);
+}
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+3. EventBinding (data: child -> parent)
+```
+@Output()
+onSaveTodo = new Subject<Todo>();
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+onSaveTodo.next(todoValues)
+```

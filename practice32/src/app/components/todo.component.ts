@@ -33,20 +33,26 @@ export class TodoComponent implements OnInit{
   // method to add FormGroup to FormArray
   addTask() {
     const g = this.fb.group({
-      description: this.fb.control<string>('sample task', [Validators.required]),
+      description: this.fb.control<string>('', [Validators.required]),
       date: this.fb.control<Date>(new Date)
     })
     this.taskArray.push(g);
-    // FIXME: FOR TESTING PURPOSES
-    console.info(">>> current Form state:", this.taskArray, this.todoForm);
   }
 
   processForm() {
-    console.info(">>> processing form")
-    // TODO: pass values from form group to Todo model object
+    console.info(">>> processing form");
+    console.info(">>> todoForm", this.todoForm);
+    // pass values from form group to Todo model object
     const todo = this.todoForm.value as Todo;
 
     // Event bind object to app component
     this.onSaveTodo.next(todo);
+  }
+
+  deleteTask(idx: number) {
+    console.info("todoForm (original):", this.todoForm);
+    console.info("delete task at index: ", idx)
+    this.taskArray.removeAt(idx);
+    console.info("todoForm (edited):", this.todoForm);
   }
 }
