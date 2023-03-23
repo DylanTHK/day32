@@ -1,0 +1,24 @@
+<h1>{{ componentTitle }}</h1>
+<table *ngIf="taskList.length <= 0">
+    <tr>
+        No tasks yet
+    </tr>
+</table>
+<table *ngIf="taskList.length > 0">
+    <thead>
+        <th>Description</th>
+        <th>Priority</th>
+        <th>Due Date</th>
+        <th></th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let t of taskList; let idx=index">
+            <td>{{ t.desc }}</td>
+            <td>{{ t.priority }}</td>
+            <td>{{ t.due }}</td>
+            <td>
+                <button type="button" (click)="deleteTask(idx)">x</button>
+            </td>
+        </tr>
+    </tbody>
+</table>

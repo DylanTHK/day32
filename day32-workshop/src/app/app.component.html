@@ -1,0 +1,46 @@
+<h1>{{ title }}</h1>
+
+<h1>Todo</h1>
+<form [formGroup]="taskForm" (ngSubmit)="addTask()">
+  <table>
+    <tr>
+      <td>Description: </td>
+      <td colspan="3">
+        <input type="text" formControlName="desc">
+      </td>
+    </tr>
+    <tr>
+      <td>Priority: </td>
+      <td>
+        High
+        <input type="radio" name="priority" value="high" formControlName="priority">
+      </td>
+      <td>
+        Medium
+        <input type="radio" name="priority" value="med" formControlName="priority" checked="checked">
+      </td>
+      <td>
+        Low
+        <input type="radio" name="priority" value="low" formControlName="priority">
+      </td>
+    </tr>
+    <tr>
+      <td>Due: </td>
+      <td colspan="3">
+        <input type="date" formControlName="due">
+      </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>
+        <button type="submit">Add</button>
+      </td>
+    </tr>
+  </table>
+</form>
+
+<!-- insert display below -->
+<app-display-todo
+  [taskList]="tasks"
+  (onDelete)="deleteTask($event)"
+></app-display-todo>
