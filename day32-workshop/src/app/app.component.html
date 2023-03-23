@@ -9,6 +9,11 @@
         <input type="text" formControlName="desc">
       </td>
     </tr>
+    <tr *ngIf="taskForm.get('desc')?.hasError('required')" class="error">
+      <td  colspan="4">
+        Please input description.
+      </td>
+    </tr>
     <tr>
       <td>Priority: </td>
       <td>
@@ -28,6 +33,11 @@
       <td>Due: </td>
       <td colspan="3">
         <input type="date" formControlName="due">
+      </td>
+    </tr>
+    <tr *ngIf="taskForm.get('due')?.hasError('required')">
+      <td colspan="4" class="error">
+        Please input date
       </td>
     </tr>
     <tr>
