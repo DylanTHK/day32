@@ -40,4 +40,10 @@ export class AppComponent implements OnInit {
   deleteTask(idx: number) {
     this.tasks.splice(idx, 1);
   }
+
+  isControlInvalid(ctrl: string): boolean {
+    const isInvalid = this.taskForm.get(ctrl)!.hasError("required");
+    const isPristine = this.taskForm.get(ctrl)!.pristine;
+    return (isInvalid && !isPristine);
+  }
 }

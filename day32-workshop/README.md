@@ -75,3 +75,13 @@ ngOnInit(): void {
     Please input date
     </td>
 </tr>
+
+2. method 2: use additional method to check for invalid and pristine
+- only return true when form is invalid AND form NOT pristine
+```
+  isControlInvalid(ctrl: string): boolean {
+    const isInvalid = this.taskForm.get(ctrl)!.hasError("required");
+    const isPristine = this.taskForm.get(ctrl)!.pristine;
+    return (isInvalid && !isPristine);
+  }
+```

@@ -35,7 +35,7 @@
         <input type="date" formControlName="due">
       </td>
     </tr>
-    <tr *ngIf="taskForm.get('due')?.hasError('required')">
+    <tr *ngIf="isControlInvalid('due')">
       <td colspan="4" class="error">
         Please input date
       </td>
@@ -48,6 +48,10 @@
     </tr>
   </table>
 </form>
+
+<p> isControlInvalid?: 
+  {{ isControlInvalid('due') }}
+</p>
 
 <!-- insert display below -->
 <app-display-todo
